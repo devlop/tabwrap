@@ -1,6 +1,6 @@
 {
     "name": "@devlop/tabwrap",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Minimalistic utility to add tab wrapping to any element, such as dialogs and popups.",
     "keywords": [
         "ux",
