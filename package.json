@@ -1,0 +1,45 @@
+{
+    "name": "@devlop/tabwrap",
+    "version": "0.1.0",
+    "description": "Minimalistic utility to add tab wrapping to any element, such as dialogs and popups.",
+    "keywords": [
+        "ux",
+        "tabbing",
+        "javascript",
+        "typescript"
+    ],
+    "author": "Johan Rosenson",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devlop/tabwrap.git"
+    },
+    "bugs": {
+        "url": "https://github.com/devlop/tabwrap/issues"
+    },
+    "homepage": "https://github.com/devlop/tabwrap",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/*"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch --preserveWatchOutput",
+        "prepack": "npm run build",
+        "prepublishOnly": "npm run build",
+        "test": "jest"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/core": "^7.12.10",
+        "@babel/preset-env": "^7.12.11",
+        "@babel/preset-typescript": "^7.12.7",
+        "@types/jest": "^26.0.20",
+        "babel-jest": "^26.6.3",
+        "jest": "^26.6.3"
+    }
+}
