@@ -141,9 +141,9 @@ const tabwrap = (rootElement : HTMLElement) : void => {
                 ? event.key === 'Tab'
                 : event.keyCode === 9;
             shiftKeyDetected = event.shiftKey;
-            activeElement = event.target !== null
-                ? event.target as HTMLElement
-                : null;
+            // activeElement = event.target !== null
+            //     ? event.target as HTMLElement
+            //     : null;
         };
 
         // @ts-ignore no overload matches
@@ -180,17 +180,17 @@ const tabwrap = (rootElement : HTMLElement) : void => {
             setUpDocumentListeners();
         }
 
-        if (tabKeyDetected && shiftKeyDetected) {
-            if (activeElement !== null && activeElement === getFirstTabbableElement()) {
-                event.preventDefault();
-
-                focusLastTabbableElement();
-            }
-        } else if (tabKeyDetected && ! shiftKeyDetected) {
+        if (tabKeyDetected && ! shiftKeyDetected) {
             if (activeElement !== null && activeElement === getLastTabbableElement()) {
                 event.preventDefault();
 
                 focusFirstTabbableElement();
+            }
+        } else if (tabKeyDetected && shiftKeyDetected) {
+            if (activeElement !== null && activeElement === getFirstTabbableElement()) {
+                event.preventDefault();
+
+                focusLastTabbableElement();
             }
         }
     });

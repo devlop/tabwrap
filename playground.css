@@ -157,6 +157,10 @@ section a:focus {
     background-color: var(--amber-100);
 }
 
+section pre {
+    font-size: 16px;
+}
+
 section div[tabindex] {
     padding: 10px;
     font-size: 16px;
