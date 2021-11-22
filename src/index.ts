@@ -15,7 +15,7 @@ const tabwrap = (rootElement : HTMLElement) : void => {
         const tabbableSelectors : Array<string> = [
             'a[href]:not([tabindex^="-"])',
             'button:not([disabled]):not([tabindex^="-"])',
-            'input:not([disabled]):not([tabindex^="-"])',
+            'input:not([type="hidden"]):not([disabled]):not([tabindex^="-"])',
             'select:not([disabled]):not([tabindex^="-"])',
             'textarea:not([disabled]):not([tabindex^="-"])',
             '[tabindex]:not([tabindex^="-"])',

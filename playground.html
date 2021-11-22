@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tabwrap playground</title>
+    <script type="text/javascript" src="./playground-dist.js" defer></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* https://tailwindcss.com/docs/customizing-colors#color-palette-reference */
+            --black: #000;
+            --blueGray-50: #F8FAFC;
+            --blueGray-100: #F1F5F9;
+            --amber-50: #FFFBEB;
+            --amber-100: #FEF3C7;
+            --amber-200: #FDE68A;
+            --green-500: #22C55E;
+            --green-600: #16A34A;
+            --blue-600: #2563EB;
+        }
+
+        #playground-instructions {
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 5px;
+            border: 2px solid var(--black);
+            padding: 20px 10px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        section {
+            outline: 2px solid var(--green-500);
+            border-radius: 5px;
+            padding: 30px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        section:hover:not(:focus-within) {
+            background-color: var(--blueGray-50);
+        }
+
+        section:focus-within {
+            outline: 2px solid var(--black);
+            background-color: var(--blueGray-100);
+        }
+
+        section[data-label]::before {
+            content: attr(data-label);
+            position: absolute;
+            top: -13px;
+            left: 15px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            background-color: var(--green-500);
+            border: 1px solid var(--green-600);
+            border-radius: 6px;
+            color: #fff;
+        }
+
+        section[data-label]:focus-within::before {
+            background-color: var(--black);
+            border: 1px solid var(--black);
+        }
+
+        section p {
+            padding: 5px;
+        }
+
+        section p:hover {
+            background-color: var(--amber-50);
+            border-radius: 5px;
+        }
+
+        section input {
+            display: block;
+            height: 40px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid var(--blue-600);
+            border-radius: 3px;
+            padding: 0 10px;
+        }
+
+        section select {
+            display: block;
+            height: 40px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid var(--blue-600);
+            border-radius: 3px;
+            padding: 0 10px;
+        }
+
+        section input:hover:not(:focus):not([disabled]),
+        section select:hover:not(:focus):not([disabled]) {
+            background-color: var(--amber-50);
+        }
+
+        section input:focus,
+        section select:focus {
+            outline: none;
+            background-color: var(--amber-100);
+        }
+
+        section a {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        section a:hover:not(:focus) {
+            background-color: var(--amber-50);
+            text-decoration: underline;
+        }
+
+        section a:focus {
+            outline: 2px solid var(--amber-200);
+            background-color: var(--amber-100);
+        }
+
+        section div[tabindex] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        section div[tabindex]:hover:not(:focus) {
+            background-color: var(--amber-50);
+            text-decoration: underline;
+        }
+
+        section div[tabindex]:focus {
+            outline: 2px solid var(--amber-200);
+            background-color: var(--amber-100);
+        }
+
+        .grid-with-custom-taborder .grid {
+            display: grid;
+            gap: 10px 0;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(4, min-content);
+            grid-template-areas: 'uno' 'zwei' 'tre' 'quattro';
+        }
+
+        .grid-with-custom-taborder .grid > [data-grid-area="uno"] {     grid-area: uno;     }
+        .grid-with-custom-taborder .grid > [data-grid-area="zwei"] {    grid-area: zwei;    }
+        .grid-with-custom-taborder .grid > [data-grid-area="tre"] {     grid-area: tre;     }
+        .grid-with-custom-taborder .grid > [data-grid-area="quattro"] { grid-area: quattro; }
+    </style>
+</head>
+<body class="p-5">
+    <main class="mb-36 max-w-xl mx-auto flex flex-col gap-10">
+        <h1 class="p-2 text-right text-lg font-bold bg-black text-white rounded-tl-xl rounded-br-xl rounded-bl-sm rounded-tr-sm">
+            tabwrap playground
+        </h1>
+
+        <div id="playground-instructions">
+            <!-- these instructions will be removed on page load if playground-dist.js have been generated -->
+            npm run playground
+        </div>
+
+        <section data-tabwrap data-label="normal inputs">
+            <p>
+                <!-- https://ipsum-community.github.io/hodoripsum/ -->
+                Hodor, hodor. Hodor. Hodor hodor HODOR! Hodor. Hodor, hodor. Hodor. Hodor?
+                Hodor hodor. Hodor hodor. Hodor hodor! Hodor hodor HODOR! Hodor. Hodor hodor!
+            </p>
+            <p>
+                <kbd>shift + tab</kbd> should work while focus is on this text.
+            </p>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <p>
+                <!-- http://skateipsum.com/ -->
+                Rad 540 quarter pipe bail. Coping deck Chris Pastras airwalk casper.
+                Cab flip crail grab g-turn rocket air. Shoveit nosebone gap steps.
+                Sacto coper camel back slam nose-bump. Airwalk gap boned out speed wobbles.
+                Kingpin skater blunt wax. Hurricane transfer smith grind nose-bump
+                Lance Mountain. Pop shove-it 180 skate or die Julien Stranger masonite.
+            </p>
+        </section>
+
+        <section data-tabwrap data-label="first disabled">
+            <p>
+                <!-- https://baconipsum.com/ -->
+                Cow boudin corned beef turducken tenderloin tail spare ribs salami prosciutto andouille.
+                Salami drumstick strip steak, kielbasa buffalo burgdoggen tail pastrami tongue brisket.
+                Shankle tongue sausage ham. Bresaola fatback pork sirloin, tongue spare ribs
+                short ribs andouille shoulder shank beef brisket hamburger.
+            </p>
+            <p>
+                <kbd>shift + tab</kbd> should work while focus is on this text.
+            </p>
+            <input type="text" disabled placeholder="disabled input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <select>
+                <option>normal select</option>
+            </select>
+            <p>
+                <!-- https://satoristudio.net/delorean-ipsum/ -->
+                See, there's Biff out there waxing it right now. Now, Biff, I wanna make sure that we
+                get two coats of wax this time, not just one. Mom, is that you?
+                Right. Right. Lou, gimme a milk, chocolate. Lorraine, my density has popped me to you.
+                Marty, you're acting like you haven't seen me in a week.
+            </p>
+        </section>
+
+        <section data-label="not wrapping">
+            <p>
+                section without tabwrap
+            </p>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" disabled placeholder="disabled input">
+        </section>
+
+        <section data-tabwrap data-label="no tabbable elements">
+            <p>
+                section with tabwrap but without any tabbable elements
+            </p>
+            <p>
+                <!-- https://spaceipsum.com/pale-blue-dot/ -->
+                The Earth is the only world known so far to harbor life. There is nowhere else,
+                at least in the near future, to which our species could migrate.
+                Visit, yes. Settle, not yet. Like it or not, for the moment the Earth is where we make our stand.
+            </p>
+        </section>
+
+        <section data-tabwrap data-label="hidden elements">
+            <p>
+                <!-- https://slipsum.com/ -->
+                Well, the way they make shows is, they make one show. That show's called a pilot.
+                Then they show that show to the people who make shows, and on the strength of
+                that one show they decide if they're going to make more shows.
+                Some pilots get picked and become television programs.
+                Some don't, become nothing. She starred in one of the ones that became nothing.
+            </p>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" hidden>
+            <pre>&lt;input type="text" hidden&gt;</pre>
+            <hr>
+            <div style="display: none;">
+                <input type="text">
+            </div>
+            <pre>
+&lt;div style="display: none;"&gt;
+    &lt;input type="text"&gt;
+&lt;/div&gt;</pre>
+            <hr>
+            <input type="text" style="display: none;">
+            <pre>&lt;input type="text" style="display: none;"&gt;</pre>
+            <hr>
+            <div hidden>
+                <input type="text">
+            </div>
+            <pre>
+&lt;div hidden&gt;
+    &lt;input type="text"&gt;
+&lt;/div&gt;</pre>
+            <p>
+                <!-- https://www.pommyipsum.com/ -->
+                Pommy ipsum red telephone box a week on Sunday come hither easy peasy jolly good,
+                fish fingers and custard working class bloke made a pig's ear of it Sherlock.
+                Working class done up like a kipper one feels that baffled could murder a
+                pint gobsmacked, jolly hockey sticks The Hounds of Baskerville ridiculous.
+                Air one's dirty linen a bit wonky nowt done up like a kipper her
+                Majesty's pleasure, rumpy pumpy lad unhand me sir.
+                Southeners scally alright geezer have a bash upper class,
+                ridicule see a man about a dog well chuffed, a right royal knees up
+                the black death a tad. Victoria sponge cake it's me peepers on
+                the beat scrubber numpty indeed, Victoria sponge cake punter
+                Sonic Screwdriver good old fashioned knees up.
+            </p>
+        </section>
+
+        <section data-tabwrap data-label="input type=hidden">
+            <p>
+                <!-- http://www.buseyipsum.com/ -->
+                I wrestled a bear once. A 750lbs black bear. The best way to communicate is compatible.
+                Compatible communication is listening with open ears and an open mind, and not
+                being fearful or judgemental about what you're hearing.You gotta go
+                through it to see there ain't nothing to it.
+            </p>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="hidden">
+            <pre>
+&lt;input type="hidden"&gt;</pre>
+        </section>
+
+        <section data-tabwrap data-label="single input">
+            <p>
+                <!-- https://ipsum-community.github.io/hodoripsum/ -->
+                Hodor, hodor. Hodor. Hodor hodor HODOR! Hodor. Hodor, hodor. Hodor. Hodor?
+                Hodor hodor. Hodor hodor. Hodor hodor! Hodor hodor HODOR! Hodor. Hodor hodor!
+            </p>
+            <input type="text" placeholder="normal input">
+            <p>
+                The focus should be trapped on this single input when tabbing.
+            </p>
+        </section>
+
+        <section data-tabwrap data-label="single untabbable input">
+            <input type="text" placeholder="normal input" tabindex="-1">
+            <p>
+                The focus should be released when tabbing.
+            </p>
+        </section>
+
+        <section data-tabwrap data-label="anchor with href">
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <a href="#">&lt;a&gt; with href</a>
+        </section>
+
+        <section data-tabwrap data-label="anchor without href">
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <a>&lt;a&gt; without href (should not be tabbed to)</a>
+        </section>
+
+        <section data-tabwrap data-label="div with tabindex">
+            <a href="#">&lt;a&gt; with href</a>
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <input type="text" placeholder="normal input">
+            <hr>
+            <div tabindex="0">
+                &lt;div&gt; with tabindex="0"
+            </div>
+        </section>
+
+        <section data-tabwrap data-label="grid with custom taborder" class="grid-with-custom-taborder">
+            <p>
+                The element order and taborder are not the same here, but the tabbing should still be top to bottom.
+            </p>
+            <div class="grid">
+                <div data-grid-area="tre">
+                    <input type="text"
+                        class="input"
+                        tabindex="3"
+                        placeholder="tabindex 3"
+                    >
+                </div>
+                <div data-grid-area="uno">
+                    <input type="text"
+                        class="input"
+                        tabindex="1"
+                        placeholder="tabindex 1"
+                    >
+                </div>
+                <div data-grid-area="quattro">
+                    <input type="text"
+                        class="input"
+                        tabindex="4"
+                        placeholder="tabindex 4"
+                    >
+                </div>
+                <div data-grid-area="zwei">
+                    <input type="text"
+                        class="input"
+                        tabindex="2"
+                        placeholder="tabindex 2"
+                    >
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
