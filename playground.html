@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>tabwrap playground</title>
     <script type="text/javascript" src="./playground-dist.js" defer></script>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
             /* https://tailwindcss.com/docs/customizing-colors#color-palette-reference */
             --black: #000;
+            --white: #fff;
             --blueGray-50: #F8FAFC;
             --blueGray-100: #F1F5F9;
             --amber-50: #FFFBEB;
@@ -22,13 +22,35 @@
 
         #playground-instructions {
             border-radius: 5px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 30px;
             text-align: center;
             border-radius: 5px;
             border: 2px solid var(--black);
             padding: 20px 10px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        main {
+            max-width: 560px;
+            margin: 0 auto 150px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px 0;
+        }
+
+        main h1 {
+            padding: 10px;
+            text-align: right;
+            font-size: 18px;
+            font-weight: 700;
+            background-color: var(--black);
+            color: var(--white);
+            border-radius: 12px 2px 12px 2px;
         }
 
         section {
@@ -156,11 +178,9 @@
         .grid-with-custom-taborder .grid > [data-grid-area="quattro"] { grid-area: quattro; }
     </style>
 </head>
-<body class="p-5">
-    <main class="mb-36 max-w-xl mx-auto flex flex-col gap-10">
-        <h1 class="p-2 text-right text-lg font-bold bg-black text-white rounded-tl-xl rounded-br-xl rounded-bl-sm rounded-tr-sm">
-            tabwrap playground
-        </h1>
+<body>
+    <main>
+        <h1>tabwrap playground</h1>
 
         <div id="playground-instructions">
             <!-- these instructions will be removed on page load if playground-dist.js have been generated -->
@@ -363,32 +383,16 @@
             </p>
             <div class="grid">
                 <div data-grid-area="tre">
-                    <input type="text"
-                        class="input"
-                        tabindex="3"
-                        placeholder="tabindex 3"
-                    >
+                    <input type="text" tabindex="3" placeholder="tabindex 3">
                 </div>
                 <div data-grid-area="uno">
-                    <input type="text"
-                        class="input"
-                        tabindex="1"
-                        placeholder="tabindex 1"
-                    >
+                    <input type="text" tabindex="1" placeholder="tabindex 1">
                 </div>
                 <div data-grid-area="quattro">
-                    <input type="text"
-                        class="input"
-                        tabindex="4"
-                        placeholder="tabindex 4"
-                    >
+                    <input type="text" tabindex="4" placeholder="tabindex 4">
                 </div>
                 <div data-grid-area="zwei">
-                    <input type="text"
-                        class="input"
-                        tabindex="2"
-                        placeholder="tabindex 2"
-                    >
+                    <input type="text" tabindex="2" placeholder="tabindex 2">
                 </div>
             </div>
         </section>
